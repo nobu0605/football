@@ -3,7 +3,7 @@ import { type NextRequest } from 'next/server'
 export async function middleware(request: NextRequest) {
   const origin = request.headers.get('host') ?? ''
   const url = new URL(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
-  const domainWithPort = `${url.hostname}:${url.port || ''}`
+  const domainWithPort = url.port ? `${url.hostname}:${url.port}` : url.hostname
 
   console.log('origin: ', origin)
   console.log('domainWithPort: ', domainWithPort)
