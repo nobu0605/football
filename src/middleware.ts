@@ -5,8 +5,6 @@ export async function middleware(request: NextRequest) {
   const url = new URL(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
   const domainWithPort = url.port ? `${url.hostname}:${url.port}` : url.hostname
 
-  console.log('origin: ', origin)
-  console.log('domainWithPort: ', domainWithPort)
   if (origin !== domainWithPort) {
     throw new Error('Not allowed origin')
   }
