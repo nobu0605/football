@@ -1,11 +1,13 @@
 import { type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
-  const origin = request.headers.get('host') ?? ''
-  const url = new URL(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
-  const domainWithPort = url.port ? `${url.hostname}:${url.port}` : url.hostname
+  const origin = request.headers.get('originUrl') ?? ''
+  const allowedOrigin = process.env.API_ENDPOINT || ''
 
-  if (origin !== domainWithPort) {
+  console.log('request.headers.get(host): ', request.headers.get('host'))
+  console.log('origin: ', origin)
+  console.log('allowedOrigin: ', allowedOrigin)
+  if (origin !== allowedOrigin) {
     throw new Error('Not allowed origin')
   }
 }

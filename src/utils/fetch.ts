@@ -23,9 +23,16 @@ export async function fetchFromAPI(
   cache: RequestCache = 'no-store',
   headers?: Headers,
 ) {
+  const _headers = headers
+    ? {
+        ...headers,
+        originUrl: window.location.origin,
+      }
+    : { originUrl: window.location.origin }
+
   const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + path, {
     method,
-    headers,
+    headers: _headers,
     cache,
   })
   const data = await res.json()
