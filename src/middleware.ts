@@ -4,9 +4,7 @@ export async function middleware(request: NextRequest) {
   const origin = request.headers.get('originUrl') ?? ''
   const allowedOrigin = process.env.API_ENDPOINT || ''
 
-  console.log('request.headers.get(host): ', request.headers.get('host'))
-  console.log('origin: ', origin)
-  console.log('allowedOrigin: ', allowedOrigin)
+  // TODO - Add a better check for allowed origins
   if (origin !== allowedOrigin) {
     throw new Error('Not allowed origin')
   }
