@@ -1,15 +1,11 @@
 'use client'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
+import { Table, TableBody, TableCell, TableHead, TableRow, styled } from '@mui/material'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import * as React from 'react'
 import { Flex } from '@/components/ui/Flex'
-import { Competition } from '@/types/competition'
+import { Competition, Season } from '@/types/competition'
 import { fetchFromAPI } from '@/utils/fetch'
 
 export default function Competition() {
@@ -41,7 +37,7 @@ export default function Competition() {
         ></Image>
       </Flex>
       <Flex $content='center'>
-        <Table sx={{ maxWidth: 650 }} aria-label='simple table'>
+        <StyledTable>
           <TableHead>
             <TableRow>
               <TableCell>Term</TableCell>
@@ -49,8 +45,8 @@ export default function Competition() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {seasons.map((season, i) => (
-              <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            {seasons.map((season: Season, i) => (
+              <TableRow key={i}>
                 <TableCell>
                   {season.startDate} ~ {season.endDate}
                 </TableCell>
@@ -74,8 +70,12 @@ export default function Competition() {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+        </StyledTable>
       </Flex>
     </Flex>
   )
 }
+
+const StyledTable = styled(Table)`
+  max-width: 650px;
+`

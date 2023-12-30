@@ -1,3 +1,25 @@
+export type Winner = {
+  address: string
+  clubColors: string
+  crest: string
+  founded: number
+  id: number
+  lastUpdated: string
+  name: string
+  shortName: string
+  tla: string
+  venue: string
+  website: string
+}
+
+export type Season = {
+  currentMatchday: number
+  endDate: string
+  id: number
+  startDate: string
+  winner: Winner | null
+}
+
 export type Competition = {
   area: {
     id: number
@@ -6,17 +28,11 @@ export type Competition = {
     flag: string
   }
   code: string
-  currentSeason: {
-    currentMatchday: number
-    endDate: string
-    id: number
-    startDate: string
-    winner: string | null
-  }
+  currentSeason: Season
   emblem: string
   id: number
   lastUpdated: string
   name: string
-  seasons: Array<any> // TODO: Add season type
+  seasons: Array<Season>
   type: string
 }
