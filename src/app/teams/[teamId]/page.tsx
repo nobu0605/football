@@ -7,18 +7,17 @@ import { DetailPanel } from '@/components/features/teams/DetailPanel'
 import { PlayersPanel } from '@/components/features/teams/PlayersPanel'
 import { Flex } from '@/components/ui/Flex'
 import { Tabs, Tab } from '@/components/ui/Tabs'
-import { Competition } from '@/types/competition'
 import { Team } from '@/types/team'
 import { fetchFromAPI } from '@/utils/fetch'
 
-export default function Competition() {
+export default function Team() {
   const params = useParams()
   const { teamId } = params
   const [team, setTeam] = useState<Team | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    async function getCompetitionData() {
+    async function getTeamData() {
       const res = await fetchFromAPI('GET', `/api/teams/${teamId}`)
 
       // TODO: I want to improve this error handling
@@ -29,7 +28,7 @@ export default function Competition() {
       setTeam(res)
     }
 
-    getCompetitionData()
+    getTeamData()
   }, [])
 
   if (error) {
@@ -40,6 +39,10 @@ export default function Competition() {
   const { squad, address, clubColors, founded, venue, website, area } = team
 
   const tabs: Array<Tab> = [
+    {
+      name: 'Players',
+      panel: <PlayersPanel squad={squad} />,
+    },
     {
       name: 'Detail',
       panel: (
@@ -52,10 +55,6 @@ export default function Competition() {
           areaFlag={area?.flag}
         />
       ),
-    },
-    {
-      name: 'Players',
-      panel: <PlayersPanel squad={squad} />,
     },
   ]
 
