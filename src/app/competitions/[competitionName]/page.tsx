@@ -25,7 +25,7 @@ export default function Competition() {
   const { seasons } = competition
 
   return (
-    <Flex $content='center' $direction='column'>
+    <Flex $content='center' $direction='column' $gap={'15px'}>
       <Flex $content='center' $items='center' $gap={'15px'}>
         <h1>{competition.name}</h1>
         <Image
@@ -51,7 +51,7 @@ export default function Competition() {
                   {season.startDate} ~ {season.endDate}
                 </TableCell>
                 <TableCell>
-                  <StyledLink href={`/teams/${season?.winner?.id}`}>
+                  <Link href={`/teams/${season?.winner?.id}`}>
                     <Flex $content='center' $direction='column'>
                       {season?.winner && (
                         <Flex $content='center' $direction='column' $gap='7px'>
@@ -67,7 +67,7 @@ export default function Competition() {
                       )}
                       {season?.winner === null && <span>No data</span>}
                     </Flex>
-                  </StyledLink>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -84,9 +84,4 @@ const StyledTable = styled(Table)`
 
 const StyledTableHead = styled(TableHead)`
   background-color: #dcdcdc;
-`
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
 `

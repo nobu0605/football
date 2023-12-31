@@ -1,7 +1,6 @@
 'use client'
 import { Table, TableBody, TableCell, TableHead, TableRow, styled } from '@mui/material'
 import Image from 'next/image'
-import Link from 'next/link'
 
 type Props = {
   address: string
@@ -53,9 +52,4 @@ const StyledTable = styled(Table)`
 
 const StyledTableHead = styled(TableHead)`
   background-color: #dcdcdc;
-`
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
 `
