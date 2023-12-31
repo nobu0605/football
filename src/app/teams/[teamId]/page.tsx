@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
+import { FavoriteStar } from '@/components/features/FavoriteStar'
 import { DetailPanel } from '@/components/features/teams/DetailPanel'
 import { PlayersPanel } from '@/components/features/teams/PlayersPanel'
 import { Flex } from '@/components/ui/Flex'
@@ -15,9 +16,10 @@ export default function Team() {
   const { teamId } = params
   const [team, setTeam] = useState<Team | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [favoriteTeamId, setFavoriteTeamId] = useState<number | null>(null)
 
   useEffect(() => {
-    async function getTeamData() {
+    async function getTeam() {
       const res = await fetchFromAPI('GET', `/api/teams/${teamId}`)
 
       // TODO: I want to improve this error handling
@@ -26,9 +28,11 @@ export default function Team() {
       }
 
       setTeam(res)
+      const _favoriteTeamId = localStorage.getItem('favoriteTeam')
+      setFavoriteTeamId(Number(_favoriteTeamId))
     }
 
-    getTeamData()
+    getTeam()
   }, [])
 
   if (error) {
@@ -63,6 +67,12 @@ export default function Team() {
       <Flex $content='center' $items='center' $gap={'15px'}>
         <h1>{team.name}</h1>
         <Image src={team.crest} alt={team.name} width={100} height={100} priority={false}></Image>
+        <FavoriteStar
+          id={team.id}
+          type='team'
+          favoriteId={favoriteTeamId}
+          setFavoriteId={setFavoriteTeamId}
+        />
       </Flex>
       <Flex $content='center'>
         <StyledTabWrapper>

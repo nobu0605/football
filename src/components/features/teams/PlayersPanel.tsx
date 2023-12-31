@@ -1,6 +1,9 @@
 'use client'
 import { Table, TableBody, TableCell, TableHead, TableRow, styled } from '@mui/material'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { FavoriteStar } from '@/components/features/FavoriteStar'
+import { Button } from '@/components/ui/Button'
 import { Player } from '@/types/team'
 
 type Props = {
@@ -9,25 +12,46 @@ type Props = {
 
 export function PlayersPanel({ squad }: Props) {
   const router = useRouter()
+  const [favoritePlayerId, setFavoritePlayerId] = useState<number | null>(null)
+
+  useEffect(() => {
+    const _favoritePlayerId = localStorage.getItem('favoritePlayer')
+    setFavoritePlayerId(Number(_favoritePlayerId))
+  }, [])
 
   return (
     <StyledTable>
       <StyledTableHead>
         <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell>Nationality</TableCell>
-          <TableCell>Position</TableCell>
-          <TableCell>Date of birth</TableCell>
+          <TableCell align='center'>Name</TableCell>
+          <TableCell align='center'>Nationality</TableCell>
+          <TableCell align='center'>Position</TableCell>
+          <TableCell align='center'>Date of birth</TableCell>
+          <TableCell align='center'>Add to favorites</TableCell>
+          <TableCell align='center'>Detail</TableCell>
         </TableRow>
       </StyledTableHead>
       <TableBody>
         {squad.map((player: Player, i) => (
-          <StyledTablePlayerRow hover key={i} onClick={() => router.push(`/players/${player.id}`)}>
+          <TableRow hover key={i}>
             <TableCell>{player.name}</TableCell>
             <TableCell>{player.nationality}</TableCell>
             <TableCell>{player.position}</TableCell>
             <TableCell>{player.dateOfBirth}</TableCell>
-          </StyledTablePlayerRow>
+            <TableCell>
+              <FavoriteStar
+                id={player.id}
+                type='player'
+                favoriteId={favoritePlayerId}
+                setFavoriteId={setFavoritePlayerId}
+              />
+            </TableCell>
+            <TableCell>
+              <Button variant='outlined' onClick={() => router.push(`/players/${player.id}`)}>
+                detail
+              </Button>
+            </TableCell>
+          </TableRow>
         ))}
       </TableBody>
     </StyledTable>
@@ -40,8 +64,4 @@ const StyledTable = styled(Table)`
 
 const StyledTableHead = styled(TableHead)`
   background-color: #dcdcdc;
-`
-
-const StyledTablePlayerRow = styled(TableRow)`
-  cursor: pointer;
 `

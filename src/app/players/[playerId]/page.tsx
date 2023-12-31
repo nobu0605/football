@@ -52,7 +52,7 @@ export default function Player() {
         </Flex>
         <Flex $direction='column'>
           <h2>Latest matches</h2>
-          <MatchesTable matches={matches} currentTeam={currentTeam} />
+          <MatchesTable matches={matches} />
         </Flex>
       </Flex>
     </Flex>

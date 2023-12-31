@@ -51,3 +51,19 @@ export type Match = {
   status: string
   utcDate: string
 }
+
+export type ResultSet = {
+  competitions: string
+  count: number
+  draws?: number
+  first: string
+  last: string
+  losses?: number
+  played?: number
+  wins?: number
+}
+
+export type Matches = {
+  matches: Array<Match>
+  resultSet: ResultSet
+}

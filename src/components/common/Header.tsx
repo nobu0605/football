@@ -30,7 +30,7 @@ export function Header() {
     <StyledAppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <StyledLink href={'/'}>
+          <Link href={'/'}>
             <StyledHomeTypography
               variant='h6'
               noWrap
@@ -40,7 +40,7 @@ export function Header() {
             >
               Football
             </StyledHomeTypography>
-          </StyledLink>
+          </Link>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button
               href='/competitions'
@@ -78,14 +78,14 @@ export function Header() {
               }}
             >
               <MenuItem onClick={() => handleCloseNavMenu()}>
-                <StyledLink href={'/competitions'}>
+                <Link href={'/competitions'}>
                   <Typography textAlign='center'>competitions</Typography>
-                </StyledLink>
+                </Link>
               </MenuItem>
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1 }}>
-            <StyledLink href={'/'}>
+            <Link href={'/'}>
               <StyledHomeTypography
                 variant='h5'
                 noWrap
@@ -95,7 +95,7 @@ export function Header() {
               >
                 Football
               </StyledHomeTypography>
-            </StyledLink>
+            </Link>
           </Box>
         </Toolbar>
       </Container>
@@ -113,8 +113,4 @@ const StyledHomeTypography = styled(Typography)`
   font-weight: 700;
   letter-spacing: 0.3rem;
   color: white;
-`
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
 `
