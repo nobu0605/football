@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { Header } from '@/components/common/Header'
+import './globals.css'
+import { Flex } from '@/components/ui/Flex'
 
 export const metadata: Metadata = {
   title: 'Football',
@@ -8,7 +11,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <Flex $gap='10px' $direction='column'>
+          <Header />
+          <div style={{ margin: '10px' }}>{children}</div>
+        </Flex>
+      </body>
     </html>
   )
 }
