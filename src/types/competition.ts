@@ -1,4 +1,5 @@
 import { Area } from '@/types/area'
+import { TeamResult } from '@/types/team'
 
 export type Winner = {
   address: string
@@ -41,3 +42,25 @@ export type RunningCompetition = {
   name: string
   type: string
 }
+
+export type Standing = {
+  group: null
+  stage: string
+  table: Array<TeamResult>
+  type: string
+}
+
+export type CompetitionResult = {
+  area: Area
+  competition: { id: number; name: string; code: string; type: string; emblem: string }
+  filters: { season: string }
+  season: Season
+  standings: Array<Standing>
+}
+
+export const competitionType = {
+  LEAGUE: 'LEAGUE',
+  CUP: 'CUP',
+} as const
+
+export type CompetitionType = (typeof competitionType)[keyof typeof competitionType]

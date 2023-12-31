@@ -36,3 +36,23 @@ export type Team = {
   venue: string
   website: string
 }
+
+export type TeamResult = {
+  draw: number
+  form: null
+  goalDifference: number
+  goalsAgainst: number
+  goalsFor: number
+  lost: number
+  playedGames: number
+  points: number
+  position: number
+  team: {
+    id: number
+    name: string
+    shortName: string
+    tla: string
+    crest: string
+  }
+  won: number
+}

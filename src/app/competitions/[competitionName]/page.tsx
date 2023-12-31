@@ -1,28 +1,69 @@
 'use client'
-import { Table, TableBody, TableCell, TableHead, TableRow, styled } from '@mui/material'
+import { styled } from '@mui/material'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { CompetitionSeasonsTable } from '@/components/features/competitions/CompetitionSeasonsTable'
+import { CupResults } from '@/components/features/competitions/CupResults'
+import { LeagueRankingTable } from '@/components/features/competitions/LeagueRankingTable'
 import { Flex } from '@/components/ui/Flex'
-import { Competition, Season } from '@/types/competition'
+import { Tabs, Tab } from '@/components/ui/Tabs'
+import { Competition, competitionType, CompetitionResult } from '@/types/competition'
 import { fetchFromAPI } from '@/utils/fetch'
+
+type CompetitionResultLabels = {
+  LEAGUE: string
+  CUP: string
+  [key: string]: string
+}
 
 export default function Competition() {
   const params = useParams()
   const { competitionName } = params
   const [competition, setCompetition] = useState<Competition | null>(null)
+  const [competitionResult, setCompetitionResult] = useState<CompetitionResult | null>(null)
 
   useEffect(() => {
-    async function getCompetitionData() {
-      const res = await fetchFromAPI('GET', `/api/competitions/${competitionName}`)
-      setCompetition(res)
+    async function getCompetition() {
+      const resCompetition = await fetchFromAPI('GET', `/api/competitions/${competitionName}`)
+
+      setCompetition(resCompetition)
+      const resCompetitionResult = await fetchFromAPI(
+        'GET',
+        `/api/competitions/${competitionName}/standings`,
+      )
+      setCompetitionResult(resCompetitionResult)
     }
-    getCompetitionData()
+    getCompetition()
   }, [])
 
-  if (!competition) return <></>
-  const { seasons } = competition
+  if (!competition || !competitionResult) return <></>
+
+  const competitionResultLabels: CompetitionResultLabels = {
+    LEAGUE: 'Ranking',
+    CUP: 'Results',
+  }
+
+  const { seasons, type, currentSeason } = competition
+
+  const tabs: Array<Tab> = [
+    {
+      name: competitionResultLabels[type],
+      panel:
+        type === competitionType.LEAGUE ? (
+          <LeagueRankingTable
+            ranks={competitionResult.standings[0].table}
+            currentSeason={currentSeason}
+          />
+        ) : (
+          <CupResults standings={competitionResult.standings} currentSeason={currentSeason} />
+        ),
+    },
+    {
+      name: 'Seasons',
+      panel: <CompetitionSeasonsTable seasons={seasons} />,
+    },
+  ]
 
   return (
     <Flex $content='center' $direction='column' $gap={'15px'}>
@@ -37,51 +78,14 @@ export default function Competition() {
         ></Image>
       </Flex>
       <Flex $content='center'>
-        <StyledTable>
-          <StyledTableHead>
-            <TableRow>
-              <TableCell>Term</TableCell>
-              <TableCell>Winner</TableCell>
-            </TableRow>
-          </StyledTableHead>
-          <TableBody>
-            {seasons.map((season: Season, i) => (
-              <TableRow key={i}>
-                <TableCell>
-                  {season.startDate} ~ {season.endDate}
-                </TableCell>
-                <TableCell>
-                  <Link href={`/teams/${season?.winner?.id}`}>
-                    <Flex $content='center' $direction='column'>
-                      {season?.winner && (
-                        <Flex $content='center' $direction='column' $gap='7px'>
-                          <span>{season?.winner?.name}</span>
-                          <Image
-                            src={season?.winner?.crest}
-                            alt={season?.winner?.name}
-                            width={100}
-                            height={100}
-                            priority={false}
-                          ></Image>
-                        </Flex>
-                      )}
-                      {season?.winner === null && <span>No data</span>}
-                    </Flex>
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </StyledTable>
+        <StyledTabWrapper>
+          <Tabs tabs={tabs} />
+        </StyledTabWrapper>
       </Flex>
     </Flex>
   )
 }
 
-const StyledTable = styled(Table)`
-  max-width: 1000px;
-`
-
-const StyledTableHead = styled(TableHead)`
-  background-color: #dcdcdc;
+const StyledTabWrapper = styled('div')`
+  min-width: 650px;
 `

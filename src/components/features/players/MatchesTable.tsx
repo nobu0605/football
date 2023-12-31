@@ -2,6 +2,7 @@
 import { Table, TableBody, TableCell, TableRow, styled, TableHead } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { TeamName } from '@/components/features/TeamName'
 import { Flex } from '@/components/ui/Flex'
 import { Match } from '@/types/match'
 import { utcToJstDate } from '@/utils/date'
@@ -57,32 +58,18 @@ export function MatchesTable({ matches }: Props) {
                 </Flex>
               </TableCell>
               <TableCell>
-                <Link href={`/teams/${homeTeam.id}`}>
-                  <Flex $direction='row' $items='center' $gap='10px'>
-                    <span>{homeTeam.name}</span>
-                    <Image
-                      src={homeTeam.crest}
-                      alt={'homeTeam'}
-                      width={35}
-                      height={35}
-                      priority={false}
-                    ></Image>
-                  </Flex>
-                </Link>
+                <TeamName
+                  href={`/teams/${homeTeam.id}`}
+                  teamName={homeTeam.name}
+                  teamImageUrl={homeTeam.crest}
+                />
               </TableCell>
               <TableCell>
-                <Link href={`/teams/${awayTeam.id}`}>
-                  <Flex $direction='row' $items='center' $gap='10px'>
-                    <span>{awayTeam.name}</span>
-                    <Image
-                      src={awayTeam.crest}
-                      alt={'awayTeam'}
-                      width={35}
-                      height={35}
-                      priority={false}
-                    ></Image>
-                  </Flex>
-                </Link>
+                <TeamName
+                  href={`/teams/${awayTeam.id}`}
+                  teamName={awayTeam.name}
+                  teamImageUrl={awayTeam.crest}
+                />
               </TableCell>
             </TableRow>
           )
