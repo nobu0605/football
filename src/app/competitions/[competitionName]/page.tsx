@@ -38,12 +38,12 @@ export default function Competition() {
       </Flex>
       <Flex $content='center'>
         <StyledTable>
-          <TableHead>
+          <StyledTableHead>
             <TableRow>
               <TableCell>Term</TableCell>
               <TableCell>Winner</TableCell>
             </TableRow>
-          </TableHead>
+          </StyledTableHead>
           <TableBody>
             {seasons.map((season: Season, i) => (
               <TableRow key={i}>
@@ -80,6 +80,10 @@ export default function Competition() {
 
 const StyledTable = styled(Table)`
   max-width: 1000px;
+`
+
+const StyledTableHead = styled(TableHead)`
+  background-color: #dcdcdc;
 `
 
 const StyledLink = styled(Link)`
