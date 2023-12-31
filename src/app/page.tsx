@@ -74,7 +74,6 @@ export default function Home() {
             <Flex $gap={'40px'}>
               <StyledFavoritePlayerNameSpan>{favoritePlayer?.name}</StyledFavoritePlayerNameSpan>
               <StyledTeamResultFlex $direction='column'>
-                <StyledMatchesSpan>Result</StyledMatchesSpan>
                 <span>
                   term: {favoritePlayerMatches.resultSet.first} ~{' '}
                   {favoritePlayerMatches.resultSet.last}
