@@ -90,7 +90,7 @@ const StyledMatchesTable = styled(Table)`
 `
 
 const StyledTableHead = styled(TableHead)`
-  background-color: #e6f3ff;
+  background-color: #dcdcdc;
 `
 
 const StyledScoreSpan = styled('span')<{ isWinner: boolean }>`

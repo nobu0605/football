@@ -52,7 +52,7 @@ const StyledTable = styled(Table)`
 `
 
 const StyledTableHead = styled(TableHead)`
-  background-color: #e6f3ff;
+  background-color: #dcdcdc;
 `
 
 const StyledLink = styled(Link)`
