@@ -1,3 +1,5 @@
+import { Area } from '@/types/area'
+
 export type Winner = {
   address: string
   clubColors: string
@@ -21,12 +23,7 @@ export type Season = {
 }
 
 export type Competition = {
-  area: {
-    id: number
-    name: string
-    code: string
-    flag: string
-  }
+  area: Area
   code: string
   currentSeason: Season
   emblem: string
@@ -34,5 +31,13 @@ export type Competition = {
   lastUpdated: string
   name: string
   seasons: Array<Season>
+  type: string
+}
+
+export type RunningCompetition = {
+  code: string
+  emblem: string
+  id: number
+  name: string
   type: string
 }
