@@ -2,8 +2,8 @@
 import { Table, TableBody, TableCell, TableRow, styled, TableHead } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
-import { TeamName } from '@/components/features/TeamName'
 import { Flex } from '@/components/ui/Flex'
+import { TeamName } from '@/features/components/TeamName'
 import { Match } from '@/types/match'
 import { utcToJstDate } from '@/utils/date'
 

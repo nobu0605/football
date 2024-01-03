@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
-import { CompetitionCards } from '@/components/features/competitions/CompetitionCards'
 import { Flex } from '@/components/ui/Flex'
+import { CompetitionCards } from '@/features/competitions/components/CompetitionCards'
 import { Competition } from '@/types/competition'
 import { fetchFromAPI } from '@/utils/fetch'
 

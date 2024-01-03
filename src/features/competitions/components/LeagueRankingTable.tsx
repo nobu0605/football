@@ -1,7 +1,7 @@
 'use client'
 import { Table, TableBody, TableCell, TableHead, TableRow, styled } from '@mui/material'
-import { TeamName } from '@/components/features/TeamName'
 import { Flex } from '@/components/ui/Flex'
+import { TeamName } from '@/features/components/TeamName'
 import { Season } from '@/types/competition'
 import { TeamResult } from '@/types/team'
 
