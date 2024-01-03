@@ -2,7 +2,7 @@
 import { Table, TableBody, TableCell, TableHead, TableRow, styled } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { FavoriteStar } from '@/components/features/FavoriteStar'
+import { FavoriteStar } from '@/features/FavoriteStar'
 import { Button } from '@/components/ui/Button'
 import { Player } from '@/types/team'
 

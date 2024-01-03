@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { CupResultTable } from '@/components/features/competitions/CupResultTable'
+import { CupResultTable } from '@/features/competitions/CupResultTable'
 import { Flex } from '@/components/ui/Flex'
 import { Standing, Season } from '@/types/competition'
 

@@ -1,6 +1,6 @@
 'use client'
 import { Table, TableBody, TableCell, TableHead, TableRow, styled } from '@mui/material'
-import { TeamName } from '@/components/features/TeamName'
+import { TeamName } from '@/features/TeamName'
 import { TeamResult } from '@/types/team'
 
 type Props = {
