@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
-import { CupResultTable } from '@/features/competitions/CupResultTable'
 import { Flex } from '@/components/ui/Flex'
+import { CupResultTable } from '@/features/competitions/components/CupResultTable'
 import { Standing, Season } from '@/types/competition'
 
 type Props = {
