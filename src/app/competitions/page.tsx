@@ -1,7 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { styled } from 'styled-components'
-import { Flex } from '@/components/ui/Flex'
 import { CompetitionCards } from '@/features/competitions/components/CompetitionCards'
 import { Competition } from '@/types/competition'
 import { fetchFromAPI } from '@/utils/fetch'
@@ -26,7 +24,3 @@ export default function Competitions() {
     </div>
   )
 }
-
-const StyledCompetitionNameFlex = styled(Flex)`
-  text-align: center;
-`
