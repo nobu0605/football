@@ -20,7 +20,7 @@ export async function fetchFootballData(
 export async function fetchFromAPI(
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
   path: string,
-  cache: RequestCache = 'no-store',
+  cache: RequestCache = 'force-cache',
   headers?: Headers,
 ) {
   const _headers = headers
