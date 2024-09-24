@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import { Flex } from '@/components/ui/Flex'
 import { Tabs, Tab } from '@/components/ui/Tabs'
+import { mobileWidth } from '@/constants/screen'
 import { FavoriteStar } from '@/features/components/FavoriteStar'
 import { DetailPanel } from '@/features/teams/components/DetailPanel'
 import { PlayersPanel } from '@/features/teams/components/PlayersPanel'
 import { Team } from '@/types/team'
 import { fetchFromAPI } from '@/utils/fetch'
 
-export default function Team() {
+export default function TeamPage() {
   const params = useParams()
   const { teamId } = params
   const [team, setTeam] = useState<Team | null>(null)
@@ -85,4 +86,8 @@ export default function Team() {
 
 const StyledTabWrapper = styled('div')`
   min-width: 650px;
+
+  @media (max-width: ${mobileWidth}px) {
+    min-width: 100%;
+  }
 `

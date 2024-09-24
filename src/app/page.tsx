@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import { Flex } from '@/components/ui/Flex'
 import { Tooltip } from '@/components/ui/Tooltip'
+import { mobileWidth } from '@/constants/screen'
 import { CompetitionCards } from '@/features/competitions/components/CompetitionCards'
 import { MatchesTable } from '@/features/players/components/MatchesTable'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { Competition } from '@/types/competition'
 import { Matches } from '@/types/match'
 import { Player } from '@/types/player'
@@ -21,6 +23,8 @@ export default function Home() {
   const [favoritePlayer, setFavoritePlayer] = useState<Player | null>(null)
   const [favoriteTeam, setFavoriteTeam] = useState<Team | null>(null)
   const [favoriteTeamMatches, setFavoriteTeamMatches] = useState<Matches | null>(null)
+  const [windowWidth] = useWindowSize()
+  const isMobile = windowWidth < mobileWidth
 
   useEffect(() => {
     const _favoritePlayerId = localStorage.getItem('favoritePlayer')
@@ -68,7 +72,11 @@ export default function Home() {
 
   if (favoritePlayerId || favoriteTeamId) {
     return (
-      <StyledFavoriteFlex $direction='row' $gap={'35px'}>
+      <StyledFavoriteFlex
+        isMobile={isMobile}
+        $direction={isMobile ? 'column' : 'row'}
+        $gap={'35px'}
+      >
         {favoritePlayer && favoritePlayerMatches && (
           <Flex $direction='column' $gap={'15px'}>
             <Flex $gap={'40px'}>
@@ -145,8 +153,8 @@ const StyledFavoritePlayerNameSpan = styled('span')`
   font-size: 30px;
 `
 
-const StyledFavoriteFlex = styled(Flex)`
-  margin: 30px;
+const StyledFavoriteFlex = styled(Flex)<{ isMobile: boolean }>`
+  margin: ${(props) => (props.isMobile ? '0px' : '30px')};
 `
 
 const StyledMatchesSpan = styled('span')`

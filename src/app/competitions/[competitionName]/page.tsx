@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Flex } from '@/components/ui/Flex'
 import { Tabs, Tab } from '@/components/ui/Tabs'
+import { mobileWidth } from '@/constants/screen'
 import { CompetitionSeasonsTable } from '@/features/competitions/components/CompetitionSeasonsTable'
 import { CupResults } from '@/features/competitions/components/CupResults'
 import { LeagueRankingTable } from '@/features/competitions/components/LeagueRankingTable'
@@ -17,7 +18,7 @@ type CompetitionResultLabels = {
   [key: string]: string
 }
 
-export default function Competition() {
+export default function CompetitionPage() {
   const params = useParams()
   const { competitionName } = params
   const [competition, setCompetition] = useState<Competition | null>(null)
@@ -88,4 +89,8 @@ export default function Competition() {
 
 const StyledTabWrapper = styled('div')`
   min-width: 650px;
+
+  @media (max-width: ${mobileWidth}px) {
+    min-width: 100%;
+  }
 `
