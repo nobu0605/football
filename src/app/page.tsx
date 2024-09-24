@@ -153,7 +153,7 @@ const StyledFavoritePlayerNameSpan = styled('span')`
   font-size: 30px;
 `
 
-const StyledFavoriteFlex = styled(Flex)<{ isMobile: string }>`
+const StyledFavoriteFlex = styled(Flex)<{ isMobile: boolean }>`
   margin: ${(props) => (props.isMobile ? '0px' : '30px')};
 `
 
