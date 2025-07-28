@@ -12,7 +12,7 @@ type Props = {
 
 export function CompetitionCards({ competitions }: Props) {
   return (
-    <Flex $wrap='wrap' $gap='15px'>
+    <Flex $wrap='wrap' $gap='15px' $content='center'>
       {competitions.map((competition: Competition, i: number) => {
         return (
           <Link key={i} href={`/competitions/${competition.code}`}>

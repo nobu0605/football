@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Footer } from '@/components/common/Footer'
 import { Header } from '@/components/common/Header'
 import './globals.css'
 import { Flex } from '@/components/ui/Flex'
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Flex $gap='10px' $direction='column'>
           <Header />
           <div style={{ margin: '10px', overflowX: 'auto' }}>{children}</div>
+          <Footer />
         </Flex>
       </body>
     </html>
