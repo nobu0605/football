@@ -129,7 +129,7 @@ export default function Home() {
   if (!competitions) return <></>
 
   return (
-    <Flex $direction='column' $gap='5px'>
+    <StyledWrapperFlex $direction='column' $gap='5px'>
       <Flex $direction='row' $items='center'>
         <StyledTitleSpan>{"Let's find your favorite team or player!"}</StyledTitleSpan>
         <Tooltip
@@ -141,9 +141,13 @@ export default function Home() {
         </Tooltip>
       </Flex>
       <CompetitionCards competitions={competitions} />
-    </Flex>
+    </StyledWrapperFlex>
   )
 }
+
+const StyledWrapperFlex = styled(Flex)`
+  min-height: 70vh;
+`
 
 const StyledTitleSpan = styled('span')`
   font-size: 20px;
